@@ -9,7 +9,7 @@ public class AuthorRepository {
   private static List<Author> authors;
 
   public void save(Author author) {
-    int authorId = IDGenerator.nextBookId();
+    int authorId = IDGenerator.nextAuthorId();
     author.setId(authorId);
     authors.add(author);
   }

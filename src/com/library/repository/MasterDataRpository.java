@@ -17,9 +17,9 @@ public class MasterDataRpository {
   }
 
   public void updateGenre(Genre genre) {
-    int bookIdx = genres.indexOf(genre);
-    if (bookIdx >= 0) {
-      genres.set(bookIdx, genre);
+    int genreIdx = genres.indexOf(genre);
+    if (genreIdx >= 0) {
+      genres.set(genreIdx, genre);
     }
   }
 
@@ -42,15 +42,15 @@ public class MasterDataRpository {
   }
 
   public void saveCategory(Category category) {
-    int categoryId = IDGenerator.nextBookId();
+    int categoryId = IDGenerator.nextCategoryId();
     category.setId(categoryId);
     categories.add(category);
   }
 
   public void updateCategory(Category category) {
-    int bookIdx = categories.indexOf(category);
-    if (bookIdx >= 0) {
-      categories.set(bookIdx, category);
+    int cateogyIdx = categories.indexOf(category);
+    if (cateogyIdx >= 0) {
+      categories.set(cateogyIdx, category);
     }
   }
 
