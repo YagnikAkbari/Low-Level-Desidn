@@ -1,0 +1,81 @@
+entity
+Genre -> properties -id, name,
+Category -> properties - id, name
+Author -> properties - id, name
+Book -> properties - id, title, ISBN, published_year, author_id, genre_ids, category_ids
+Borrowing -> properties - id, book_id, patron_id, due_date, return_date
+Reservation -> properties - id, book_id, patron_id, reservation_date, status
+Patron -> properties - id, name, email, mobile_no - methods getBorrowingHisotry
+Library -> properties - id, name, location
+Branch -> properties - id, library_id, location
+LibraryBook -> properties - id, library_id, book_id, total_copies, available_copies, borrowed_copies, reserved_copies
+Notifier implements EmailNotifier, SMSNotifier
+
+Library Repository
+addLibrary
+addBranch
+removeLibrary
+removeBranch
+
+Book Repository
+addBook
+updateBook
+removeBook
+searchBook -> internally decide which function to call while serching on differne fields
+recommendBook
+
+Patron Repository
+addPatron
+updatePatron
+
+Inventry Repository
+borrowBook -> notifyUser
+returnBook -> notifyUser
+addBookCopy
+removeBookCopy
+getTotalAvailable -> return available_count, borrowed_count, reserved__count -> make it generatic to give for only one book or list of books (use overload)
+transferBookToBranch
+reserveBook -> notifyUser - notify when it avialable to who have reserve first (others will be notify as their trun come)
+cancelReservation
+
+Author Repository
+addAuthor
+updateAuthor
+removeAuthor
+
+
+Library Service
+addLibrary
+addBranch
+removeLibrary
+removeBranch
+
+Inventry Service
+borrowBook -> send notification
+returnBook
+
+Patron Service
+addPatron
+updatePatron
+
+NotificationService
+notifyUser
+
+Book Service
+addBook -> call repo after applying validation -> title, authtor, valide year, ISBN number
+updateBook -> call repo after applying validation -> id exist, title, authtor, valide year, ISBN number
+removeBook -> call repo after applying validation -> id exist
+serechBook -> call repo after applying validation -> check if serch by field is valid or not (allwed -> title, author, ISBN) -> here we seprate which search function to call or may be repo will decide
+recommendBook
+
+Reservation Service
+reserveBook
+cancelReservation
+transferBookToBranch
+
+Author Service
+addAuthor
+updateAuthor
+removeAuthor
+
+apply at least two design patterns
