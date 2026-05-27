@@ -6,6 +6,7 @@ public class IDGenerator {
   private static int authorId = 0;
   private static int categoryId = 0;
   private static int libraryId = 0;
+  private static int branchId = 0;
   private static int patronId = 0;
 
   public static int nextBookId() {
@@ -31,6 +32,11 @@ public class IDGenerator {
   public static int nextLibraryId() {
     libraryId = libraryId + 1;
     return libraryId;
+  }
+
+  public static int nextBranchId() {
+    branchId = branchId + 1;
+    return branchId;
   }
 
   public static int nextPatronId() {

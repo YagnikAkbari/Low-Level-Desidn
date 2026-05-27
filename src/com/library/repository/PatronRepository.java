@@ -1,12 +1,13 @@
 package com.library.repository;
 
+import java.util.ArrayList;
 import java.util.List;
 
 import com.library.entity.Patron;
 import com.library.utils.IDGenerator;
 
 public class PatronRepository {
-  private static List<Patron> patrons;
+  private static List<Patron> patrons = new ArrayList<>();
 
   public void save(Patron patron) {
     int patronId = IDGenerator.nextPatronId();

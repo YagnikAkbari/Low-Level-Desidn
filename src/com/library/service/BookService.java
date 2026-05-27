@@ -1,5 +1,7 @@
 package com.library.service;
 
+import java.util.List;
+
 import com.library.entity.Book;
 import com.library.repository.BookRepository;
 
@@ -20,5 +22,9 @@ public class BookService {
 
   public void removeBook(int bookId) {
     bookRepo.delete(bookId);
+  }
+
+  public List<Book> listBook() {
+    return bookRepo.list();
   }
 }

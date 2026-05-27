@@ -12,12 +12,25 @@ public class Branch {
     this.libraryId = libraryId;
   }
 
+  public Branch(String name, int libraryId) {
+    this.name = name;
+    this.libraryId = libraryId;
+  }
+
   public int getId() {
     return id;
   }
 
   public void setId(int id) {
     this.id = id;
+  }
+
+  public int getLibraryId() {
+    return libraryId;
+  }
+
+  public void setLibraryId(int libraryId) {
+    this.libraryId = libraryId;
   }
 
   public String getName() {
@@ -34,18 +47,5 @@ public class Branch {
 
   public void setLocation(String location) {
     this.location = location;
-  }
-
-  public int getLibraryId() {
-    return libraryId;
-  }
-
-  public void setLibraryId(int libraryId) {
-    this.libraryId = libraryId;
-  }
-
-  public Branch(String name, int libraryId) {
-    this.name = name;
-    this.libraryId = libraryId;
   }
 }

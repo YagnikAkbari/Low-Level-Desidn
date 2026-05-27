@@ -2,17 +2,17 @@ package com.library.service;
 
 import com.library.entity.Category;
 import com.library.entity.Genre;
-import com.library.repository.MasterDataRpository;
+import com.library.repository.MasterDataRepository;
 
 public class MasterDataService {
-  private MasterDataRpository masterDataRepo;
+  private MasterDataRepository masterDataRepo;
 
-  public MasterDataService(MasterDataRpository masterDataRepo) {
+  public MasterDataService(MasterDataRepository masterDataRepo) {
     this.masterDataRepo = masterDataRepo;
   }
 
-  public void addGenre(Genre genre) {
-    masterDataRepo.saveGenre(genre);
+  public int addGenre(Genre genre) {
+    return masterDataRepo.saveGenre(genre);
   }
 
   public void updateGenre(Genre genre) {

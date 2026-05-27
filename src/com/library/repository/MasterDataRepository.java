@@ -1,19 +1,21 @@
 package com.library.repository;
 
+import java.util.ArrayList;
 import java.util.List;
 
 import com.library.entity.Genre;
 import com.library.entity.Category;
 import com.library.utils.IDGenerator;
 
-public class MasterDataRpository {
-  private static List<Genre> genres;
-  private static List<Category> categories;
+public class MasterDataRepository {
+  private static List<Genre> genres = new ArrayList<>();
+  private static List<Category> categories = new ArrayList<>();
 
-  public void saveGenre(Genre genre) {
+  public int saveGenre(Genre genre) {
     int genreId = IDGenerator.nextGenreId();
     genre.setId(genreId);
     genres.add(genre);
+    return genreId;
   }
 
   public void updateGenre(Genre genre) {
@@ -39,6 +41,14 @@ public class MasterDataRpository {
 
   public List<Genre> listGenre() {
     return genres;
+  }
+
+  public List<Genre> listGenre(int[] genreIds) {
+    List<Genre> genreList = new ArrayList<>();
+    for (int genreId : genreIds) {
+      genreList.add(this.getGenreById(genreId));
+    }
+    return genreList;
   }
 
   public void saveCategory(Category category) {

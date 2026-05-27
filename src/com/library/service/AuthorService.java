@@ -10,15 +10,19 @@ public class AuthorService {
     this.authorRepo = authorRepo;
   }
 
-  public void addAuthor(Author author) {
-    authorRepo.save(author);
+  public int addAuthor(Author author) {
+    return authorRepo.save(author);
   }
 
   public void updateAuthor(Author author) {
     authorRepo.update(author);
   }
 
-  public void removeAuthor(int bookId) {
-    authorRepo.delete(bookId);
+  public void removeAuthor(int authorId) {
+    authorRepo.delete(authorId);
+  }
+
+  public void getAuthorById(int authorId) {
+    authorRepo.getAuthorById(authorId);
   }
 }

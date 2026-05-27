@@ -1,17 +1,19 @@
 package com.library.repository;
 
+import java.util.ArrayList;
 import java.util.List;
 
 import com.library.entity.Author;
 import com.library.utils.IDGenerator;
 
 public class AuthorRepository {
-  private static List<Author> authors;
+  private static List<Author> authors = new ArrayList<>();
 
-  public void save(Author author) {
+  public int save(Author author) {
     int authorId = IDGenerator.nextAuthorId();
     author.setId(authorId);
     authors.add(author);
+    return authorId;
   }
 
   public void update(Author author) {
