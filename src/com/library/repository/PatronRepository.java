@@ -2,6 +2,7 @@ package com.library.repository;
 
 import java.util.ArrayList;
 import java.util.List;
+import java.util.Optional;
 
 import com.library.entity.Patron;
 import com.library.utils.IDGenerator;
@@ -23,17 +24,20 @@ public class PatronRepository {
   }
 
   public void delete(int patronId) {
-    Patron patron = this.getPatronById(patronId);
+    Patron patron = this.getPatronById(patronId).get();
+    if (patron == null) {
+      return;
+    }
     patrons.remove(patron);
   }
 
-  public Patron getPatronById(int patronId) {
+  public Optional<Patron> getPatronById(int patronId) {
     for (Patron patron : patrons) {
       if (patron.getId() == patronId) {
-        return patron;
+        return Optional.ofNullable(patron);
       }
     }
-    return null;
+    return Optional.empty();
   }
 
   public List<Patron> list() {

@@ -1,5 +1,7 @@
 package com.library.service;
 
+import java.util.List;
+
 import com.library.entity.Branch;
 import com.library.entity.Library;
 import com.library.repository.LibraryRepository;
@@ -33,5 +35,9 @@ public class LibraryService {
 
   public void removeBranch(int branchId) {
     libraryRepo.deleteBranch(branchId);
+  }
+
+  public List<Branch> listBranch() {
+    return libraryRepo.listBranch();
   }
 }

@@ -39,7 +39,7 @@ public class BookRepository {
         return Optional.ofNullable(book);
       }
     }
-    return Optional.ofNullable(null);
+    return Optional.empty();
   }
 
   public List<Book> list() {

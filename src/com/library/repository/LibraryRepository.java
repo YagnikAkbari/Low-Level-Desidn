@@ -2,6 +2,7 @@ package com.library.repository;
 
 import java.util.ArrayList;
 import java.util.List;
+import java.util.Optional;
 
 import com.library.entity.Branch;
 import com.library.entity.Library;
@@ -26,17 +27,17 @@ public class LibraryRepository {
   }
 
   public void deleteLibrary(int libraryId) {
-    Library library = this.getLibraryById(libraryId);
+    Library library = this.getLibraryById(libraryId).get();
     libraries.remove(library);
   }
 
-  public Library getLibraryById(int libraryId) {
+  public Optional<Library> getLibraryById(int libraryId) {
     for (Library library : libraries) {
       if (library.getId() == libraryId) {
-        return library;
+        return Optional.ofNullable(library);
       }
     }
-    return null;
+    return Optional.empty();
   }
 
   public List<Library> listLibrary() {
@@ -58,17 +59,20 @@ public class LibraryRepository {
   }
 
   public void deleteBranch(int branchId) {
-    Branch branch = this.getBranchById(branchId);
+    Branch branch = this.getBranchById(branchId).get();
+    if (branch == null) {
+      return;
+    }
     branches.remove(branch);
   }
 
-  public Branch getBranchById(int branchId) {
+  public Optional<Branch> getBranchById(int branchId) {
     for (Branch branch : branches) {
       if (branch.getId() == branchId) {
-        return branch;
+        return Optional.ofNullable(branch);
       }
     }
-    return null;
+    return Optional.empty();
   }
 
   public List<Branch> listBranch() {

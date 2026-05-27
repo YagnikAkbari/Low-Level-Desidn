@@ -1,5 +1,7 @@
 package com.library.service;
 
+import java.util.List;
+
 import com.library.entity.Category;
 import com.library.entity.Genre;
 import com.library.repository.MasterDataRepository;
@@ -19,6 +21,10 @@ public class MasterDataService {
     masterDataRepo.updateGenre(genre);
   }
 
+  public List<Genre> listGenre() {
+    return masterDataRepo.listGenre();
+  }
+
   public void removeGenre(int genreId) {
     masterDataRepo.deleteGenre(genreId);
   }
@@ -33,5 +39,9 @@ public class MasterDataService {
 
   public void removeCategory(int categoryId) {
     masterDataRepo.deleteCategory(categoryId);
+  }
+
+  public List<Category> listCategory() {
+    return masterDataRepo.listCategory();
   }
 }

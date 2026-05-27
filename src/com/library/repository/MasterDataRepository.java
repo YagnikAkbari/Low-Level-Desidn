@@ -2,6 +2,7 @@ package com.library.repository;
 
 import java.util.ArrayList;
 import java.util.List;
+import java.util.Optional;
 
 import com.library.entity.Genre;
 import com.library.entity.Category;
@@ -26,17 +27,20 @@ public class MasterDataRepository {
   }
 
   public void deleteGenre(int genreId) {
-    Genre genre = this.getGenreById(genreId);
+    Genre genre = this.getGenreById(genreId).get();
+    if (genre == null) {
+      return;
+    }
     genres.remove(genre);
   }
 
-  public Genre getGenreById(int genreId) {
+  public Optional<Genre> getGenreById(int genreId) {
     for (Genre genre : genres) {
       if (genre.getId() == genreId) {
-        return genre;
+        return Optional.ofNullable(genre);
       }
     }
-    return null;
+    return Optional.empty();
   }
 
   public List<Genre> listGenre() {
@@ -46,7 +50,7 @@ public class MasterDataRepository {
   public List<Genre> listGenre(int[] genreIds) {
     List<Genre> genreList = new ArrayList<>();
     for (int genreId : genreIds) {
-      genreList.add(this.getGenreById(genreId));
+      genreList.add(this.getGenreById(genreId).get());
     }
     return genreList;
   }
@@ -66,17 +70,20 @@ public class MasterDataRepository {
   }
 
   public void deleteCategory(int categoryId) {
-    Category category = this.getCategoryById(categoryId);
+    Category category = this.getCategoryById(categoryId).get();
+    if (category == null) {
+      return;
+    }
     categories.remove(category);
   }
 
-  public Category getCategoryById(int categoryId) {
+  public Optional<Category> getCategoryById(int categoryId) {
     for (Category category : categories) {
       if (category.getId() == categoryId) {
-        return category;
+        return Optional.ofNullable(category);
       }
     }
-    return null;
+    return Optional.empty();
   }
 
   public List<Category> listCategory() {

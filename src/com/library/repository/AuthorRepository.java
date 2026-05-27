@@ -2,6 +2,7 @@ package com.library.repository;
 
 import java.util.ArrayList;
 import java.util.List;
+import java.util.Optional;
 
 import com.library.entity.Author;
 import com.library.utils.IDGenerator;
@@ -24,17 +25,20 @@ public class AuthorRepository {
   }
 
   public void delete(int authorId) {
-    Author author = this.getAuthorById(authorId);
+    Author author = this.getAuthorById(authorId).get();
+    if (author == null) {
+      return;
+    }
     authors.remove(author);
   }
 
-  public Author getAuthorById(int authorId) {
+  public Optional<Author> getAuthorById(int authorId) {
     for (Author author : authors) {
       if (author.getId() == authorId) {
-        return author;
+        return Optional.ofNullable(author);
       }
     }
-    return null;
+    return Optional.empty();
   }
 
   public List<Author> list() {
