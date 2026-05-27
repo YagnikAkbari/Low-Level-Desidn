@@ -54,4 +54,15 @@ public class LibraryBook {
     this.bookId = bookId;
   }
 
+  @Override
+  public String toString() {
+    return String.format(
+        "{\"id\":%d,\"branchId\":%d,\"bookId\":%d,\"totalCopies\":%d,\"borrowedCopies\":%d,\"reservedCopies\":%d}",
+        id,
+        branchId,
+        bookId,
+        totalCopies,
+        borrowedCopies,
+        reservedCopies);
+  }
 }

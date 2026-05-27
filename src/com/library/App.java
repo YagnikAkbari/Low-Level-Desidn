@@ -13,6 +13,8 @@ import com.library.repository.InventoryRepository;
 import com.library.repository.LibraryRepository;
 import com.library.repository.MasterDataRepository;
 import com.library.seeder.SeedBook;
+import com.library.seeder.SeedInventory;
+import com.library.seeder.SeedLibrary;
 import com.library.service.AuthorService;
 import com.library.service.BookService;
 import com.library.service.InventoryService;
@@ -32,12 +34,8 @@ public class App {
     InventoryRepository inventoryRepo = new InventoryRepository();
     InventoryService inventoryService = new InventoryService(inventoryRepo);
     SeedBook.seed(authorService, masterDataService, bookService);
-    for (Book book : bookService.listBook()) {
-      for (Branch libraryBranch : libraryService.listBranch()) {
-        LibraryBook lB = new LibraryBook(book.getId(), libraryBranch.getId(), 15);
-        inventoryService.createInventory(lB);
-      }
-    }
+    SeedLibrary.seed(libraryService);
+    SeedInventory.seed(bookService, libraryService, inventoryService);
     for (LibraryBook libraryBook : inventoryService.listLibraryBooks()) {
       System.out.println(libraryBook);
     }

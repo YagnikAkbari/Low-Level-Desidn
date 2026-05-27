@@ -46,7 +46,7 @@ public class IDGenerator {
   }
 
   public static int nextLibraryBookId() {
-    patronId = patronId + 1;
-    return patronId;
+    libraryBookId = libraryBookId + 1;
+    return libraryBookId;
   }
 }

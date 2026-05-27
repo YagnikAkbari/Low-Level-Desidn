@@ -13,8 +13,8 @@ public class LibraryService {
     this.libraryRepo = libraryRepo;
   }
 
-  public void addLibrary(Library library) {
-    libraryRepo.saveLibrary(library);
+  public int addLibrary(Library library) {
+    return libraryRepo.saveLibrary(library);
   }
 
   public void updateLibrary(Library library) {
@@ -25,8 +25,8 @@ public class LibraryService {
     libraryRepo.deleteLibrary(libraryId);
   }
 
-  public void addBranch(Branch branch) {
-    libraryRepo.saveBranch(branch);
+  public int addBranch(Branch branch) {
+    return libraryRepo.saveBranch(branch);
   }
 
   public void updateBranch(Branch branch) {
