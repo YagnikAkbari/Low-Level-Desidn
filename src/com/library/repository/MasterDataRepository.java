@@ -51,10 +51,11 @@ public class MasterDataRepository {
     return genreList;
   }
 
-  public void saveCategory(Category category) {
+  public int saveCategory(Category category) {
     int categoryId = IDGenerator.nextCategoryId();
     category.setId(categoryId);
     categories.add(category);
+    return categoryId;
   }
 
   public void updateCategory(Category category) {

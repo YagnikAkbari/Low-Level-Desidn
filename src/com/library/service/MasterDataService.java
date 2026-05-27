@@ -23,8 +23,8 @@ public class MasterDataService {
     masterDataRepo.deleteGenre(genreId);
   }
 
-  public void addCategory(Category category) {
-    masterDataRepo.saveCategory(category);
+  public int addCategory(Category category) {
+    return masterDataRepo.saveCategory(category);
   }
 
   public void updateCategory(Category category) {
