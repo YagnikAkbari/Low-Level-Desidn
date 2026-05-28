@@ -22,7 +22,7 @@ public class AuthorService {
     authorRepo.delete(authorId);
   }
 
-  public void getAuthorById(int authorId) {
-    authorRepo.getAuthorById(authorId);
+  public Author getAuthorById(int authorId) {
+    return authorRepo.getAuthorById(authorId).get();
   }
 }

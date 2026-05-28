@@ -1,14 +1,15 @@
 package com.library.entity;
 
-import java.util.Date;
-
 import com.library.enums.BorrowStatus;
+
+import java.time.LocalDate;
 
 public class Reservation {
   private int id;
+  private int branchId;
   private int bookId;
   private int patronId;
-  private Date reservationDate;
+  private LocalDate reservationDate;
   private BorrowStatus status;
 
   public int getId() {
@@ -27,6 +28,14 @@ public class Reservation {
     this.bookId = bookId;
   }
 
+  public int getBranchId() {
+    return branchId;
+  }
+
+  public void setBranchId(int branchId) {
+    this.branchId = branchId;
+  }
+
   public int getPatronId() {
     return patronId;
   }
@@ -35,11 +44,11 @@ public class Reservation {
     this.patronId = patronId;
   }
 
-  public Date getReservationDate() {
+  public LocalDate getReservationDate() {
     return reservationDate;
   }
 
-  public void setReservationDate(Date reservationDate) {
+  public void setReservationDate(LocalDate reservationDate) {
     this.reservationDate = reservationDate;
   }
 
@@ -51,10 +60,23 @@ public class Reservation {
     this.status = status;
   }
 
-  public Reservation(int bookId, int patronId, Date reservationDate) {
+  public Reservation(int branchId, int bookId, int patronId, LocalDate reservationDate) {
+    this.branchId = branchId;
     this.bookId = bookId;
     this.patronId = patronId;
     this.reservationDate = reservationDate;
     this.status = BorrowStatus.PENDING;
+  }
+
+  @Override
+  public String toString() {
+    return String.format(
+        "{\"id\":%d,\"branchId\":%d,\"bookId\":%d,\"patronId\":%d,\"reservationDate\":\"%s\",\"status\":\"%s\"}",
+        id,
+        branchId,
+        bookId,
+        patronId,
+        reservationDate,
+        status);
   }
 }
