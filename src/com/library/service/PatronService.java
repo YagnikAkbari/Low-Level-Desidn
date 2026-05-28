@@ -1,9 +1,7 @@
 package com.library.service;
 
 import java.util.List;
-import java.util.Optional;
 
-import com.library.entity.Book;
 import com.library.entity.Patron;
 import com.library.repository.PatronRepository;
 
