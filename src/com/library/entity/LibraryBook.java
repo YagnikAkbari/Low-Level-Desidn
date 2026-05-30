@@ -15,17 +15,26 @@ public class LibraryBook {
   }
 
   public void addCopies(int copies) {
+    if (copies <= 0) {
+      throw new IllegalArgumentException("Copies must be greater than 0");
+    }
     this.totalCopies += copies;
   }
 
   public void removeCopies(int copies) {
-    this.totalCopies -= copies;
-    if (this.totalCopies < 0) {
-      this.totalCopies = 0;
+    if (copies <= 0) {
+      throw new IllegalArgumentException("Copies must be greater than 0");
     }
+    if (copies > getAvailableCopies()) {
+      throw new IllegalArgumentException("Not enough available copies");
+    }
+    this.totalCopies -= copies;
   }
 
   public void borrowCopies(int copies) {
+    if (copies <= 0) {
+      throw new IllegalArgumentException("Copies must be greater than 0");
+    }
     if (copies > getAvailableCopies()) {
       throw new IllegalArgumentException("Not enough available copies");
     }
@@ -33,6 +42,9 @@ public class LibraryBook {
   }
 
   public void reserveCopies(int copies) {
+    if (copies <= 0) {
+      throw new IllegalArgumentException("Copies must be greater than 0");
+    }
     if (copies > getAvailableCopies()) {
       throw new IllegalArgumentException("Not enough available copies");
     }
@@ -40,17 +52,23 @@ public class LibraryBook {
   }
 
   public void returnBorrowedCopies(int copies) {
-    this.borrowedCopies -= copies;
-    if (this.borrowedCopies < 0) {
-      this.borrowedCopies = 0;
+    if (copies <= 0) {
+      throw new IllegalArgumentException("Copies must be greater than 0");
     }
+    if (copies > this.borrowedCopies) {
+      throw new IllegalArgumentException("Cannot return more copies than borrowed");
+    }
+    this.borrowedCopies -= copies;
   }
 
   public void releaseReservedCopies(int copies) {
-    this.reservedCopies -= copies;
-    if (this.reservedCopies < 0) {
-      this.reservedCopies = 0;
+    if (copies <= 0) {
+      throw new IllegalArgumentException("Copies must be greater than 0");
     }
+    if (copies > this.reservedCopies) {
+      throw new IllegalArgumentException("Cannot release more copies than reserved");
+    }
+    this.reservedCopies -= copies;
   }
 
   public int getTotalCopies() {

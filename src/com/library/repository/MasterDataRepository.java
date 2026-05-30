@@ -53,7 +53,8 @@ public class MasterDataRepository {
   public List<Genre> listGenre(int[] genreIds) {
     List<Genre> genreList = new ArrayList<>();
     for (int genreId : genreIds) {
-      genreList.add(this.getGenreById(genreId).get());
+      Optional<Genre> genre = this.getGenreById(genreId);
+      genre.ifPresent(genreList::add);
     }
     return genreList;
   }

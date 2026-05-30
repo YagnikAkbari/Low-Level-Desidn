@@ -43,4 +43,9 @@ public class Patron {
   public void setMobile_no(String mobile_no) {
     this.mobile_no = mobile_no;
   }
+
+  @Override
+  public String toString() {
+    return "{Id=" + this.id + "; Name=" + this.name + "; Email=" + this.email + "; Mobile=" + this.mobile_no + ";}";
+  }
 }

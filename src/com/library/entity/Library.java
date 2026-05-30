@@ -28,4 +28,9 @@ public class Library {
     this.name = name;
   }
 
+  @Override
+  public String toString() {
+    return "{Id=" + this.id + "; Name=" + this.name + ";}";
+  }
+
 }

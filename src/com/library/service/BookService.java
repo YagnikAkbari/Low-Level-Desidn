@@ -4,6 +4,7 @@ import java.util.List;
 
 import com.library.entity.Book;
 import com.library.enums.BookSearchField;
+import com.library.exception.InvalidInputException;
 import com.library.repository.BookRepository;
 import com.library.validators.BookValidators;
 
@@ -19,35 +20,24 @@ public class BookService {
   }
 
   public void addBook(Book book) {
-    try {
-      BookValidators.validate(book);
-    } catch (Exception exception) {
-      throw new IllegalArgumentException(exception.getMessage(), exception);
-    }
+    validateBook(book);
     bookRepo.save(book);
   }
 
   public void updateBook(Book book) {
-    try {
-      BookValidators.validate(book);
-    } catch (Exception exception) {
-      throw new IllegalArgumentException(exception.getMessage(), exception);
-    }
-    if (bookRepo.getBookById(book.getId()).isEmpty()) {
-      throw new IllegalArgumentException("Book not found");
-    }
+    validateBook(book);
+    ensureBookExists(book.getId());
     bookRepo.update(book);
   }
 
   public void removeBook(int bookId) {
-    if (bookRepo.getBookById(bookId).isEmpty()) {
-      throw new IllegalArgumentException("Book not found");
-    }
+    ensureBookExists(bookId);
     bookRepo.delete(bookId);
   }
 
   public Book getBookById(int bookId) {
-    return bookRepo.getBookById(bookId).get();
+    return bookRepo.getBookById(bookId)
+        .orElseThrow(() -> new IllegalArgumentException("Book not found"));
   }
 
   public List<Book> searchBooks(String search) {
@@ -67,5 +57,23 @@ public class BookService {
 
   public List<Book> recommendBook(int authorId, int genreId, int categoryId) {
     return bookRepo.recommendBook(authorId, genreId, categoryId);
+  }
+
+  public boolean bookExists(int bookId) {
+    return bookRepo.getBookById(bookId).isPresent();
+  }
+
+  private void validateBook(Book book) {
+    try {
+      BookValidators.validate(book);
+    } catch (InvalidInputException exception) {
+      throw new IllegalArgumentException(exception.getMessage(), exception);
+    }
+  }
+
+  private void ensureBookExists(int bookId) {
+    if (!bookExists(bookId)) {
+      throw new IllegalArgumentException("Book not found");
+    }
   }
 }

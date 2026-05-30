@@ -6,6 +6,8 @@ import java.time.LocalDate;
 import com.library.entity.Reservation;
 import com.library.enums.BorrowStatus;
 import com.library.repository.ReservationRepository;
+import com.library.exception.InvalidInputException;
+import com.library.validators.LibraryValidators;
 
 public class ReservationService {
   private ReservationRepository reservationRepo;
@@ -28,6 +30,7 @@ public class ReservationService {
   }
 
   public int reserveBook(Reservation reservation) {
+    validateReservation(reservation);
     if (reservation.getReservationDate() == null) {
       reservation.setReservationDate(LocalDate.now());
     }
@@ -49,7 +52,8 @@ public class ReservationService {
   }
 
   public void cancelReservation(int reservationId) {
-    Reservation reservation = reservationRepo.getReservation(reservationId).orElseThrow();
+    Reservation reservation = reservationRepo.getReservation(reservationId)
+        .orElseThrow(() -> new IllegalArgumentException("Reservation not found"));
     reservation.setStatus(BorrowStatus.CANCELLED);
     reservationRepo.update(reservation);
     if (inventoryService != null) {
@@ -68,5 +72,13 @@ public class ReservationService {
 
   public void notifyReservationReady(int bookId, int patronId) {
     notificationService.notifyUser(String.valueOf(patronId), "Book " + bookId + " is now available");
+  }
+
+  private void validateReservation(Reservation reservation) {
+    try {
+      LibraryValidators.validateReservation(reservation);
+    } catch (InvalidInputException exception) {
+      throw new IllegalArgumentException(exception.getMessage(), exception);
+    }
   }
 }

@@ -7,6 +7,8 @@ import com.library.entity.Borrowing;
 import com.library.entity.Reservation;
 import com.library.repository.BorrowingRepository;
 import com.library.repository.ReservationRepository;
+import com.library.validators.LibraryValidators;
+import com.library.exception.InvalidInputException;
 
 public class BorrowingService {
   private BorrowingRepository borrowingRepo;
@@ -32,6 +34,7 @@ public class BorrowingService {
   }
 
   public void borrowBook(int branchId, int bookId, int patronId, int copies) {
+    validateCopies(copies);
     inventoryService.borrowBook(branchId, bookId, patronId, copies);
     Borrowing borrow = new Borrowing(branchId, bookId, patronId, LocalDate.now().plusDays(14));
     borrow.setBorrowDate(LocalDate.now());
@@ -41,6 +44,7 @@ public class BorrowingService {
   }
 
   public void returnBook(int branchId, int bookId, int patronId, int copies) {
+    validateCopies(copies);
     inventoryService.returnBook(branchId, bookId, patronId, copies);
     notificationService.notifyUser(String.valueOf(patronId),
         "Return recorded for book " + bookId);
@@ -63,6 +67,14 @@ public class BorrowingService {
             "Reservation fulfilled for book " + bookId);
         break;
       }
+    }
+  }
+
+  private void validateCopies(int copies) {
+    try {
+      LibraryValidators.validateCopies(copies);
+    } catch (InvalidInputException exception) {
+      throw new IllegalArgumentException(exception.getMessage(), exception);
     }
   }
 }

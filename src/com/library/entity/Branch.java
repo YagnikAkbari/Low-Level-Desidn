@@ -48,4 +48,10 @@ public class Branch {
   public void setLocation(String location) {
     this.location = location;
   }
+
+  @Override
+  public String toString() {
+    return "{Id=" + this.id + "; Name=" + this.name + "; Location=" + this.location + "; LibraryId=" + this.libraryId
+        + ";}";
+  }
 }
