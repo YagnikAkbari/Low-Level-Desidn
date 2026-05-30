@@ -9,6 +9,10 @@ import com.library.repository.LibraryRepository;
 public class LibraryService {
   private LibraryRepository libraryRepo;
 
+  public LibraryService() {
+    this(new LibraryRepository());
+  }
+
   public LibraryService(LibraryRepository libraryRepo) {
     this.libraryRepo = libraryRepo;
   }
@@ -39,5 +43,9 @@ public class LibraryService {
 
   public List<Branch> listBranch() {
     return libraryRepo.listBranch();
+  }
+
+  public List<Library> listLibrary() {
+    return libraryRepo.listLibrary();
   }
 }

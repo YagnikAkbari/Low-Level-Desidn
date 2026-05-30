@@ -20,18 +20,21 @@ public class MasterDataRepository {
   }
 
   public void updateGenre(Genre genre) {
-    int genreIdx = genres.indexOf(genre);
-    if (genreIdx >= 0) {
-      genres.set(genreIdx, genre);
+    for (int i = 0; i < genres.size(); i++) {
+      if (genres.get(i).getId() == genre.getId()) {
+        genres.set(i, genre);
+        return;
+      }
     }
   }
 
   public void deleteGenre(int genreId) {
-    Genre genre = this.getGenreById(genreId).get();
-    if (genre == null) {
-      return;
+    for (int i = 0; i < genres.size(); i++) {
+      if (genres.get(i).getId() == genreId) {
+        genres.remove(i);
+        return;
+      }
     }
-    genres.remove(genre);
   }
 
   public Optional<Genre> getGenreById(int genreId) {
@@ -63,18 +66,21 @@ public class MasterDataRepository {
   }
 
   public void updateCategory(Category category) {
-    int cateogyIdx = categories.indexOf(category);
-    if (cateogyIdx >= 0) {
-      categories.set(cateogyIdx, category);
+    for (int i = 0; i < categories.size(); i++) {
+      if (categories.get(i).getId() == category.getId()) {
+        categories.set(i, category);
+        return;
+      }
     }
   }
 
   public void deleteCategory(int categoryId) {
-    Category category = this.getCategoryById(categoryId).get();
-    if (category == null) {
-      return;
+    for (int i = 0; i < categories.size(); i++) {
+      if (categories.get(i).getId() == categoryId) {
+        categories.remove(i);
+        return;
+      }
     }
-    categories.remove(category);
   }
 
   public Optional<Category> getCategoryById(int categoryId) {

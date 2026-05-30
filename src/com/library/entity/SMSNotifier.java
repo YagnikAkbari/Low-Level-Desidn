@@ -15,4 +15,10 @@ public class SMSNotifier implements Notifier {
   public void setToMobileNo(String toMobileNo) {
     this.toMobileNo = toMobileNo;
   }
+
+  @Override
+  public void notifyUser(String recipient, String message) {
+    this.toMobileNo = recipient;
+    System.out.println("[SMS] from=" + this.fromMobileNo + " to=" + this.toMobileNo + " message=" + message);
+  }
 }

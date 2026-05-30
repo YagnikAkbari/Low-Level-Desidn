@@ -34,6 +34,14 @@ public class Borrowing {
     return bookId;
   }
 
+  public int getBranchId() {
+    return branchId;
+  }
+
+  public void setBranchId(int branchId) {
+    this.branchId = branchId;
+  }
+
   public void setBookId(int bookId) {
     this.bookId = bookId;
   }
@@ -56,5 +64,13 @@ public class Borrowing {
 
   public LocalDate getReturnDate() {
     return returnDate;
+  }
+
+  public LocalDate getBorrowDate() {
+    return borrowDate;
+  }
+
+  public void setBorrowDate(LocalDate borrowDate) {
+    this.borrowDate = borrowDate;
   }
 }

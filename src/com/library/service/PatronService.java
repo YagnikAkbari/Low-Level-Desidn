@@ -8,6 +8,10 @@ import com.library.repository.PatronRepository;
 public class PatronService {
   private PatronRepository patronRepo;
 
+  public PatronService() {
+    this(new PatronRepository());
+  }
+
   public PatronService(PatronRepository patronRepo) {
     this.patronRepo = patronRepo;
   }
@@ -30,5 +34,11 @@ public class PatronService {
 
   public List<Patron> listPatron() {
     return patronRepo.list();
+  }
+
+  public void addPatronIfMissing(Patron patron) {
+    if (patronRepo.getPatronById(patron.getId()).isEmpty()) {
+      patronRepo.save(patron);
+    }
   }
 }

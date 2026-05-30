@@ -1,5 +1,5 @@
 package com.library.entity;
 
-interface Notifier {
-
+public interface Notifier {
+  void notifyUser(String recipient, String message);
 }

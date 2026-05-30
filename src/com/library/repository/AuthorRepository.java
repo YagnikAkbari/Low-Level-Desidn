@@ -18,18 +18,21 @@ public class AuthorRepository {
   }
 
   public void update(Author author) {
-    int authorIdx = authors.indexOf(author);
-    if (authorIdx >= 0) {
-      authors.set(authorIdx, author);
+    for (int i = 0; i < authors.size(); i++) {
+      if (authors.get(i).getId() == author.getId()) {
+        authors.set(i, author);
+        return;
+      }
     }
   }
 
   public void delete(int authorId) {
-    Author author = this.getAuthorById(authorId).get();
-    if (author == null) {
-      return;
+    for (int i = 0; i < authors.size(); i++) {
+      if (authors.get(i).getId() == authorId) {
+        authors.remove(i);
+        return;
+      }
     }
-    authors.remove(author);
   }
 
   public Optional<Author> getAuthorById(int authorId) {

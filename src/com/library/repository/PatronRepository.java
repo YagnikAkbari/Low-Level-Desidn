@@ -17,18 +17,21 @@ public class PatronRepository {
   }
 
   public void update(Patron patron) {
-    int patronIdx = patrons.indexOf(patron);
-    if (patronIdx >= 0) {
-      patrons.set(patronIdx, patron);
+    for (int i = 0; i < patrons.size(); i++) {
+      if (patrons.get(i).getId() == patron.getId()) {
+        patrons.set(i, patron);
+        return;
+      }
     }
   }
 
   public void delete(int patronId) {
-    Patron patron = this.getPatronById(patronId).get();
-    if (patron == null) {
-      return;
+    for (int i = 0; i < patrons.size(); i++) {
+      if (patrons.get(i).getId() == patronId) {
+        patrons.remove(i);
+        return;
+      }
     }
-    patrons.remove(patron);
   }
 
   public Optional<Patron> getPatronById(int patronId) {

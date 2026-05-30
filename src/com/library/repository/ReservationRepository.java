@@ -18,18 +18,21 @@ public class ReservationRepository {
   }
 
   public void update(Reservation reservation) {
-    int reservationId = reservations.indexOf(reservation);
-    if (reservationId >= 0) {
-      reservations.set(reservationId, reservation);
+    for (int i = 0; i < reservations.size(); i++) {
+      if (reservations.get(i).getId() == reservation.getId()) {
+        reservations.set(i, reservation);
+        return;
+      }
     }
   }
 
   public void delete(int reservationId) {
-    Reservation reservation = this.getReservation(reservationId).get();
-    if (reservation == null) {
-      return;
+    for (int i = 0; i < reservations.size(); i++) {
+      if (reservations.get(i).getId() == reservationId) {
+        reservations.remove(i);
+        return;
+      }
     }
-    reservations.remove(reservation);
   }
 
   public Optional<Reservation> getReservation(int reservationId) {
@@ -43,5 +46,25 @@ public class ReservationRepository {
 
   public List<Reservation> list() {
     return reservations;
+  }
+
+  public List<Reservation> listByBook(int bookId) {
+    List<Reservation> result = new ArrayList<>();
+    for (Reservation reservation : reservations) {
+      if (reservation.getBookId() == bookId) {
+        result.add(reservation);
+      }
+    }
+    return result;
+  }
+
+  public List<Reservation> listByPatron(int patronId) {
+    List<Reservation> result = new ArrayList<>();
+    for (Reservation reservation : reservations) {
+      if (reservation.getPatronId() == patronId) {
+        result.add(reservation);
+      }
+    }
+    return result;
   }
 }

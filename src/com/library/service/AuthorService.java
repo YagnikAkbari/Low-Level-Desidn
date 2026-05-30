@@ -6,6 +6,10 @@ import com.library.repository.AuthorRepository;
 public class AuthorService {
   private AuthorRepository authorRepo;
 
+  public AuthorService() {
+    this(new AuthorRepository());
+  }
+
   public AuthorService(AuthorRepository authorRepo) {
     this.authorRepo = authorRepo;
   }
@@ -24,5 +28,9 @@ public class AuthorService {
 
   public Author getAuthorById(int authorId) {
     return authorRepo.getAuthorById(authorId).get();
+  }
+
+  public java.util.List<Author> listAuthor() {
+    return authorRepo.list();
   }
 }

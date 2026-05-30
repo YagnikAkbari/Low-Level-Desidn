@@ -16,4 +16,10 @@ public class EmailNotifier implements Notifier {
     this.fromEmail = fromEmail;
   }
 
+  @Override
+  public void notifyUser(String recipient, String message) {
+    this.toEmail = recipient;
+    System.out.println("[EMAIL] from=" + this.fromEmail + " to=" + this.toEmail + " message=" + message);
+  }
+
 }

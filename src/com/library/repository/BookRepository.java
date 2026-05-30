@@ -20,18 +20,21 @@ public class BookRepository {
   }
 
   public void update(Book book) {
-    int bookIdx = books.indexOf(book);
-    if (bookIdx >= 0) {
-      books.set(bookIdx, book);
+    for (int i = 0; i < books.size(); i++) {
+      if (books.get(i).getId() == book.getId()) {
+        books.set(i, book);
+        return;
+      }
     }
   }
 
   public void delete(int bookId) {
-    Book book = this.getBookById(bookId).get();
-    if (book == null) {
-      return;
+    for (int i = 0; i < books.size(); i++) {
+      if (books.get(i).getId() == bookId) {
+        books.remove(i);
+        return;
+      }
     }
-    books.remove(book);
   }
 
   public Optional<Book> getBookById(int bookId) {
@@ -62,7 +65,26 @@ public class BookRepository {
       return results;
     }
     for (Book book : books) {
-      if (book.getISBN() != null && book.getTitle().toLowerCase().contains(search.toLowerCase())) {
+      if (book.getISBN() != null && book.getISBN().toLowerCase().contains(search.toLowerCase())) {
+        results.add(book);
+      }
+    }
+    return results;
+  }
+
+  public List<Book> searchBookByAuthor(String search) {
+    List<Book> results = new ArrayList<>();
+    if (search == null) {
+      return results;
+    }
+    int authorId;
+    try {
+      authorId = Integer.parseInt(search.trim());
+    } catch (NumberFormatException exception) {
+      return results;
+    }
+    for (Book book : books) {
+      if (book.getAuthorId() == authorId) {
         results.add(book);
       }
     }
@@ -73,6 +95,8 @@ public class BookRepository {
     switch (bookSearchField) {
       case ISBN:
         return searchBookByISBN(search);
+      case AUTHOR:
+        return searchBookByAuthor(search);
       default:
         return searchBookByTitle(search);
     }
@@ -84,5 +108,19 @@ public class BookRepository {
 
   public List<Book> list() {
     return books;
+  }
+
+  public List<Book> recommendBook(int authorId, int genreId, int categoryId) {
+    List<Book> recommendations = new ArrayList<>();
+    for (Book book : books) {
+      boolean authorMatch = authorId <= 0 || book.getAuthorId() == authorId;
+      boolean genreMatch = genreId <= 0 || (book.getGenreIds() != null && book.getGenreIds().contains(genreId));
+      boolean categoryMatch = categoryId <= 0
+          || (book.getCategoryIds() != null && book.getCategoryIds().contains(categoryId));
+      if (authorMatch && (genreMatch || categoryMatch)) {
+        recommendations.add(book);
+      }
+    }
+    return recommendations;
   }
 }

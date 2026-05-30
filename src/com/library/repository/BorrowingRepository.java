@@ -18,18 +18,21 @@ public class BorrowingRepository {
   }
 
   public void update(Borrowing borrowing) {
-    int borrowingIdx = borrowings.indexOf(borrowing);
-    if (borrowingIdx >= 0) {
-      borrowings.set(borrowingIdx, borrowing);
+    for (int i = 0; i < borrowings.size(); i++) {
+      if (borrowings.get(i).getId() == borrowing.getId()) {
+        borrowings.set(i, borrowing);
+        return;
+      }
     }
   }
 
   public void delete(int borrowingId) {
-    Borrowing borrowing = this.getBorrowingById(borrowingId).get();
-    if (borrowing == null) {
-      return;
+    for (int i = 0; i < borrowings.size(); i++) {
+      if (borrowings.get(i).getId() == borrowingId) {
+        borrowings.remove(i);
+        return;
+      }
     }
-    borrowings.remove(borrowing);
   }
 
   public Optional<Borrowing> getBorrowingById(int borrowingId) {
@@ -39,5 +42,9 @@ public class BorrowingRepository {
       }
     }
     return Optional.empty();
+  }
+
+  public List<Borrowing> list() {
+    return borrowings;
   }
 }
