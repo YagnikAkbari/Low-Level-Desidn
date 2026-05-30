@@ -1,6 +1,13 @@
-# Library Module
+# Library Management
 
-This folder contains the standalone `com.library` console application for managing:
+This folder contains the library management console application.
+
+## Main Project Readme
+
+For build and run instructions, see the root README:
+
+[`README.md`](../../../README.md)
+
 
 - libraries and branches
 - authors, genres, and categories
