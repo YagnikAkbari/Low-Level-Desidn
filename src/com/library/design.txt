@@ -21,7 +21,7 @@ Book Repository
 addBook - ☑️
 updateBook - ☑️
 removeBook - ☑️
-searchBook -> internally decide which function to call while serching on differne fields
+searchBook -> internally decide which function to call while serching on differne fields - ☑️
 recommendBook
 
 Patron Repository - ☑️

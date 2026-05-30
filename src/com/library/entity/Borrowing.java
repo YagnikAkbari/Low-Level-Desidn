@@ -1,21 +1,24 @@
 package com.library.entity;
 
-import java.util.Date;
+import java.time.LocalDate;
 
 public class Borrowing {
   private int id;
+  private int branchId;
   private int bookId;
   private int patronId;
-  private Date dueDate;
-  private Date returnDate;
+  private LocalDate dueDate;
+  private LocalDate borrowDate;
+  private LocalDate returnDate;
 
-  public Borrowing(int bookId, int patronId, Date dueDate) {
+  public Borrowing(int branchId, int bookId, int patronId, LocalDate dueDate) {
+    this.branchId = branchId;
     this.bookId = bookId;
     this.patronId = patronId;
     this.dueDate = dueDate;
   }
 
-  public void setReturnDate(Date returnDate) {
+  public void setReturnDate(LocalDate returnDate) {
     this.returnDate = returnDate;
   }
 
@@ -43,15 +46,15 @@ public class Borrowing {
     this.patronId = patronId;
   }
 
-  public Date getDueDate() {
+  public LocalDate getDueDate() {
     return dueDate;
   }
 
-  public void setDueDate(Date dueDate) {
+  public void setDueDate(LocalDate dueDate) {
     this.dueDate = dueDate;
   }
 
-  public Date getReturnDate() {
+  public LocalDate getReturnDate() {
     return returnDate;
   }
 }

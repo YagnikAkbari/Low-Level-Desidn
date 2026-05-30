@@ -41,9 +41,9 @@ public class InventoryRepository {
     return Optional.empty();
   }
 
-  public Optional<LibraryBook> getLibraryBook(int libraryId, int bookId) {
+  public Optional<LibraryBook> getLibraryBook(int branchId, int bookId) {
     for (LibraryBook libraryBook : libraryBooks) {
-      if (libraryBook.getBranchId() == libraryId && libraryBook.getBookId() == bookId) {
+      if (libraryBook.getBranchId() == branchId && libraryBook.getBookId() == bookId) {
         return Optional.ofNullable(libraryBook);
       }
     }

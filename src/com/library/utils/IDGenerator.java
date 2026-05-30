@@ -10,6 +10,7 @@ public class IDGenerator {
   private static int patronId = 0;
   private static int libraryBookId = 0;
   private static int reservationId = 0;
+  private static int borrowingId = 0;
 
   public static int nextBookId() {
     bookId = bookId + 1;
@@ -54,5 +55,10 @@ public class IDGenerator {
   public static int nextReservationId() {
     reservationId = reservationId + 1;
     return reservationId;
+  }
+
+  public static int nextBorrowingId() {
+    borrowingId = borrowingId + 1;
+    return borrowingId;
   }
 }
